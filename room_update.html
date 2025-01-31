@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Reservation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        input {
+            margin: 10px;
+            padding: 8px;
+            width: 200px;
+        }
+        button {
+            padding: 10px;
+            cursor: pointer;
+        }
+        #message {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Update Reservation Room</h2>
+    
+    <form id="updateForm">
+        <input type="text" id="reservationCode" placeholder="Reservation Code" required>
+        <br>
+        <input type="text" id="newRoomNumber" placeholder="New Room Number" required>
+        <br>
+        <button type="submit">Update</button>
+    </form>
+
+    <div id="message"></div>
+
+    <script>
+        document.getElementById("updateForm").addEventListener("submit", async function(event) {
+            event.preventDefault();
+
+            let reservationCode = document.getElementById("reservationCode").value;
+            let newRoomNumber = document.getElementById("newRoomNumber").value;
+
+            let response = await fetch("/update_reservation", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ reservationCode, newRoomNumber })
+            });
+
+            let result = await response.json();
+            document.getElementById("message").innerText = result.message;
+        });
+    </script>
+
+</body>
+</html>
