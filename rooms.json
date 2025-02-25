@@ -1,0 +1,32 @@
+{
+	"rooms": {
+		"fead296a-f2fe-4a4a-8973-f42a7cb3d086": {
+			"wifi_name": "BoArenal1",
+			"wifi_password": "airebo07",
+			"door_code": "Yale-6-7-0-1-check",
+			"room_num": "1",
+			"project": "bo"
+		},
+		"872b5b39-8043-4b18-aa73-864aa95ae4fe": {
+			"wifi_name": "BoArenal2",
+			"wifi_password": "aguabo07",
+			"door_code": "1-9-0-2-#",
+			"room_num": "2",
+			"project": "bo"
+		},
+		"81d6a9be-e7c9-441f-b238-eccda489ddc9": {
+			"wifi_name": "BoArenal3",
+			"wifi_password": "fuegobo98",
+			"door_code": "Yale-9-8-0-3-check",
+			"room_num": "3",
+			"project": "bo"
+		}
+	},
+	"projects": {
+		"bo": {
+			"main_gate_code": "5-2-6-3",
+			"payment_link": "buy.stripe.com/fZe6qZfIQ1ftczC000?client_reference_id=",
+			"timezone": "America/Costa_Rica"
+		}
+	}
+}
