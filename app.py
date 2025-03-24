@@ -84,7 +84,7 @@ TRANSLATIONS = {
         'payment_failed': 'Payment Failed',
         'payment_failed_message': 'We were unable to process your payment. Please try again.',
         'try_again': 'Try Again',
-        'add_ons_title': 'Enhance Your Getaways with Add-ons',
+        'add_ons_title': 'Enhance Your Getaway with Add-ons',
         'tagline': 'Make Your Stay Unforgettable'
     },
     'ES': {
