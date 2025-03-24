@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, send_from_directory
 
 import sys
 import os
@@ -55,12 +55,18 @@ def process_payment():
 
     # Simulate payment processing (random success/failure)
     success = random.choice([True, False])
+    
+    # TODO: add stripe / BAC / ONVO payment handler here
 
     if success:
         return render_template('success.html', lang=language, t=TRANSLATIONS[language])
     else:
         return render_template('failure.html', lang=language, t=TRANSLATIONS[language])
 
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'),
+                          'favicon.ico',mimetype='image/vnd.microsoft.icon')
 
 # Translations dictionary
 TRANSLATIONS = {
@@ -73,8 +79,8 @@ TRANSLATIONS = {
         'country_region': 'Country or region',
         'pay': 'Pay',
         'full_name_placeholder': 'Full name on card',
-        'zipCode': 'ZIP code',
-        'postalCode': 'Postal code',
+        'zipcode': 'ZIP code',
+        'postalcode': 'Postal code',
         'postcode': 'Postcode',
         'payment_success': 'Payment Successful',
         'thank_you': 'Thank You!',
@@ -82,7 +88,8 @@ TRANSLATIONS = {
         'return_home': 'Return to Home',
         'payment_failed': 'Payment Failed',
         'payment_failed_message': 'We were unable to process your payment. Please try again.',
-        'try_again': 'Try Again'
+        'try_again': 'Try Again',
+        'add_ons_title': 'Optional Add-ons'
     },
     'ES': {
         'payment_details': 'Detalles del Pago',
@@ -93,8 +100,8 @@ TRANSLATIONS = {
         'country_region': 'País o región',
         'pay': 'Pagar',
         'full_name_placeholder': 'Nombre completo en la tarjeta',
-        'zipCode': 'Código ZIP',
-        'postalCode': 'Código postal',
+        'zipcode': 'Código ZIP',
+        'postalcode': 'Código postal',
         'postcode': 'Código postal',
         'payment_success': 'Pago Exitoso',
         'thank_you': '¡Gracias!',
@@ -102,7 +109,8 @@ TRANSLATIONS = {
         'return_home': 'Volver al Inicio',
         'payment_failed': 'Pago Fallido',
         'payment_failed_message': 'No pudimos procesar su pago. Por favor, intente nuevamente.',
-        'try_again': 'Intentar Nuevamente'
+        'try_again': 'Intentar Nuevamente',
+        'add_ons_title': 'Extras opcionales'
     }
 }
 

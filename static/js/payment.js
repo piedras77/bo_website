@@ -8,35 +8,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const zip = document.getElementById('zip');
     const country = document.getElementById('country');
     const payButton = document.getElementById('payButton');
-    const currentLanguage = document.getElementById('currentLanguage').value;
+    const translations = document.getElementById('t').value;
     const zipLabel = document.getElementById('zipLabel');
+    const addOns = document.getElementById('addOns');
+    const priceDisplay = document.querySelector('.price-display h2');
+    const basePrice = new URLSearchParams(window.location.search).get('price');
 
     let showValidationErrors = false;
-
-    const translations = {
-        EN: {
-            invalidEmail: 'Please enter a valid email address',
-            invalidCard: 'Please enter a valid card number',
-            invalidExpiry: 'Please enter a valid expiry date',
-            invalidCvc: 'Please enter a valid CVC',
-            invalidName: 'Please enter the cardholder name',
-            invalidZip: 'Please enter a valid postal code',
-            zipCode: 'ZIP code',
-            postalCode: 'Postal code',
-            postcode: 'Postcode'
-        },
-        ES: {
-            invalidEmail: 'Por favor, ingrese un correo electrónico válido',
-            invalidCard: 'Por favor, ingrese un número de tarjeta válido',
-            invalidExpiry: 'Por favor, ingrese una fecha de vencimiento válida',
-            invalidCvc: 'Por favor, ingrese un CVC válido',
-            invalidName: 'Por favor, ingrese el nombre del titular',
-            invalidZip: 'Por favor, ingrese un código postal válido',
-            zipCode: 'Código ZIP',
-            postalCode: 'Código postal',
-            postcode: 'Código postal'
-        }
-    };
 
     const countryInfo = {
         US: { format: 'ZIP code', required: true, pattern: '^\\d{5}(-\\d{4})?$' },
@@ -94,16 +72,20 @@ document.addEventListener('DOMContentLoaded', function() {
     country.addEventListener('change', function() {
         const selectedCountry = countryInfo[this.value];
         const zipContainer = document.getElementById('zipContainer');
-
+        console.log(zipContainer);
         if (selectedCountry) {
-            zipLabel.textContent = translations[currentLanguage][selectedCountry.format.toLowerCase().replace(' ', '')];
+            zipLabel.textContent = JSON.parse(translations)[selectedCountry.format.toLowerCase().replace(' ', '')];
             zip.required = selectedCountry.required;
             zip.pattern = selectedCountry.pattern || null;
-            zipContainer.style.display = selectedCountry.required ? 'block' : 'none';
+            zipContainer.style.display =  'none'; // selectedCountry.required ? 'block' : 'none';
             if (!selectedCountry.required) {
                 zip.value = '';
             }
+        } else {
+            // TODO: remove here as well, add more countries, populate through JS 
+            console.log("zip not required, remove this block");
         }
+
         validateForm();
     });
 
@@ -128,13 +110,13 @@ document.addEventListener('DOMContentLoaded', function() {
         payButton.disabled = !isFormValid;
 
         if (showValidationErrors) {
-            showValidationMessage(email, isEmailValid, translations[currentLanguage].invalidEmail);
-            showValidationMessage(cardNumber, isCardNumberValid, translations[currentLanguage].invalidCard);
-            showValidationMessage(expiry, isExpiryValid, translations[currentLanguage].invalidExpiry);
-            showValidationMessage(cvc, isCvcValid, translations[currentLanguage].invalidCvc);
-            showValidationMessage(cardholderName, isNameValid, translations[currentLanguage].invalidName);
+            showValidationMessage(email, isEmailValid, translations.invalidEmail);
+            showValidationMessage(cardNumber, isCardNumberValid, translations.invalidCard);
+            showValidationMessage(expiry, isExpiryValid, translations.invalidExpiry);
+            showValidationMessage(cvc, isCvcValid, translations.invalidCvc);
+            showValidationMessage(cardholderName, isNameValid, translations.invalidName);
             if (selectedCountry && selectedCountry.required) {
-                showValidationMessage(zip, isZipValid, translations[currentLanguage].invalidZip);
+                showValidationMessage(zip, isZipValid, translations.invalidZip);
             }
         }
 
@@ -203,4 +185,48 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     });
+
+
+    // Hardcoded add-ons (can later come from DB/API)
+    const addOnOptions = [
+        { id: 'wine', label: 'Wine Bottle', price: 40 },
+        { id: 'flowers', label: 'Flowers', price: 50 },
+        { id: 'tour1', label: 'Tour e.g. 1', price: 105 },
+        { id: 'tour2', label: 'Tour e.g. 2', price: 305 }
+    ];
+
+        // Dynamically build options
+    addOnOptions.forEach(item => {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'form-check mb-2';
+
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.className = 'form-check-input';
+        checkbox.id = item.id;
+        checkbox.value = item.id;
+        checkbox.dataset.price = item.price;
+
+        const label = document.createElement('label');
+        label.className = 'form-check-label';
+        label.htmlFor = item.id;
+        label.textContent = `${item.label} - $${item.price}`;
+
+        wrapper.appendChild(checkbox);
+        wrapper.appendChild(label);
+        addOns.appendChild(wrapper);
+    });
+
+    function updatePrice() {
+        let total = parseFloat(basePrice) || 0;;
+        const checkedBoxes = addOns.querySelectorAll('input[type="checkbox"]:checked');
+        checkedBoxes.forEach(checkbox => {
+            const price = parseFloat(checkbox.dataset.price);
+            if (!isNaN(price)) total += price;
+        });
+
+        priceDisplay.textContent = `$${total}`;
+    }
+
+    addOns.addEventListener('change', updatePrice);
 });
