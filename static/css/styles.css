@@ -1,0 +1,130 @@
+body {
+    background-color: #f8f9fa;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.business-info {
+    background-color: #fff;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.business-content {
+    max-width: 80%;
+}
+
+.business-name {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.business-image {
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.business-image img {
+    width: 100%;
+    height: auto;
+    max-height: calc(100vh - 200px);
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.payment-column {
+    background-color: #f8f9fa;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.payment-form {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+}
+
+.price-display {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.price-display h2 {
+    font-size: 2.5rem;
+    color: #333;
+    margin: 0;
+}
+
+.form-control, .form-select {
+    padding: 0.75rem;
+    border: 1px solid #ced4da;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.btn-primary {
+    padding: 0.75rem;
+    font-weight: 500;
+}
+
+.btn-primary:disabled {
+    background-color: #ccc;
+    border-color: #ccc;
+}
+
+.payment-method {
+    border: 1px solid #ced4da;
+    padding: 1rem;
+    border-radius: 4px;
+}
+
+.error-input {
+    border-color: #dc3545;
+}
+
+.error-message {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    display: none;
+}
+
+.error-message.show {
+    display: block;
+}
+
+@media (max-width: 768px) {
+    body {
+        overflow-y: auto;
+    }
+
+    .business-info, .payment-column {
+        height: auto;
+        min-height: auto;
+        padding: 1rem;
+    }
+
+    .business-content {
+        max-width: 100%;
+    }
+
+    .payment-form {
+        margin: 1rem 0;
+    }
+}
