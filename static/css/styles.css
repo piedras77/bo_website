@@ -24,6 +24,15 @@ body {
     text-align: center;
 }
 
+.tagline {
+    font-size: 1.25rem;
+    color: #666;
+    font-style: italic;
+    text-align: center;
+    margin-top: -1.5rem;
+    margin-bottom: 2.5rem;
+}
+
 .business-image {
     width: 100%;
     margin-bottom: 2rem;

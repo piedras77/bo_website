@@ -84,7 +84,8 @@ TRANSLATIONS = {
         'payment_failed': 'Payment Failed',
         'payment_failed_message': 'We were unable to process your payment. Please try again.',
         'try_again': 'Try Again',
-        'add_ons_title': 'Optional Add-ons'
+        'add_ons_title': 'Enhance Your Getaways with Add-ons',
+        'tagline': 'Make Your Stay Unforgettable'
     },
     'ES': {
         'payment_details': 'Detalles del Pago',
@@ -105,7 +106,8 @@ TRANSLATIONS = {
         'payment_failed': 'Pago Fallido',
         'payment_failed_message': 'No pudimos procesar su pago. Por favor, intente nuevamente.',
         'try_again': 'Intentar Nuevamente',
-        'add_ons_title': 'Extras opcionales'
+        'add_ons_title': 'Mejora Tu Escapada con Add-ons',
+        'tagline': 'Disfruta de una estadía inolvidable'
     }
 }
 

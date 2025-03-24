@@ -190,8 +190,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const addOnOptions = [
         { id: 'wine', label: 'Wine Bottle', price: 40 },
         { id: 'flowers', label: 'Flowers', price: 50 },
-        { id: 'tour1', label: 'Tour e.g. 1', price: 105 },
-        { id: 'tour2', label: 'Tour e.g. 2', price: 305 }
+        { id: 'shuttle', label: 'Shuttle to from SJO airport', price: 100 },
+        { id: 'atv', label: 'ATV Tour with Pickup & Drop-Off', price: 75 },
+        { id: 'hotspring', label: 'Entrance to Ecotermales hotsprings', price: 55 },
+        { id: 'zipline', label: 'Zip line Tour with Pickup & Drop-Off', price: 60 }
     ];
 
         // Dynamically build options
