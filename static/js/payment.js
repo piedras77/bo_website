@@ -72,7 +72,6 @@ document.addEventListener('DOMContentLoaded', function() {
     country.addEventListener('change', function() {
         const selectedCountry = countryInfo[this.value];
         const zipContainer = document.getElementById('zipContainer');
-        console.log(zipContainer);
         if (selectedCountry) {
             zipLabel.textContent = JSON.parse(translations)[selectedCountry.format.toLowerCase().replace(' ', '')];
             zip.required = selectedCountry.required;

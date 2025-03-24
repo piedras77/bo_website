@@ -63,11 +63,6 @@ def process_payment():
     else:
         return render_template('failure.html', lang=language, t=TRANSLATIONS[language])
 
-@app.route('/favicon.ico')
-def favicon():
-    return send_from_directory(os.path.join(app.root_path, 'static'),
-                          'favicon.ico',mimetype='image/vnd.microsoft.icon')
-
 # Translations dictionary
 TRANSLATIONS = {
     'EN': {
