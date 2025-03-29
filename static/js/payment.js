@@ -8,35 +8,41 @@ document.addEventListener('DOMContentLoaded', function() {
     const zip = document.getElementById('zip');
     const country = document.getElementById('country');
     const payButton = document.getElementById('payButton');
-    const translations = document.getElementById('t').value;
+    let rawTranslations = document.getElementById('t').value;
+    rawTranslations = rawTranslations.replace(/'/g, '"').replace(/\bFalse\b/g, 'false').replace(/\bTrue\b/g, 'true');
+    const translations = JSON.parse(rawTranslations);
     const zipLabel = document.getElementById('zipLabel');
     const addOns = document.getElementById('addOns');
     const priceDisplay = document.querySelector('.price-display h2');
     const basePrice = new URLSearchParams(window.location.search).get('price');
 
     let showValidationErrors = false;
+    const countryInfo = JSON.parse(document.getElementById('countryInfo').value);
+    // Populate the country dropdown
+    const countrySelect = document.getElementById('country');
+    Object.entries(countryInfo).forEach(([key, value]) => {
+        const option = document.createElement('option');
+        option.value = key;
+        option.textContent = value.name;
+        countrySelect.appendChild(option);
+      });
 
-    const countryInfo = {
-        US: { format: 'ZIP code', required: true, pattern: '^\\d{5}(-\\d{4})?$' },
-        CA: { format: 'Postal code', required: true, pattern: '^[A-Za-z]\\d[A-Za-z][ -]?\\d[A-Za-z]\\d$' },
-        GB: { format: 'Postcode', required: true, pattern: '^[A-Z]{1,2}\\d[A-Z\\d]? ?\\d[A-Z]{2}$' },
-        FR: { format: 'Postal code', required: true, pattern: '^\\d{5}$' },
-        DE: { format: 'Postal code', required: true, pattern: '^\\d{5}$' },
-        IT: { format: 'Postal code', required: true, pattern: '^\\d{5}$' },
-        ES: { format: 'Postal code', required: true, pattern: '^\\d{5}$' },
-        JP: { format: 'Postal code', required: true, pattern: '^\\d{3}-?\\d{4}$' },
-        AU: { format: 'Postcode', required: true, pattern: '^\\d{4}$' },
-        BR: { format: 'Postal code', required: true, pattern: '^\\d{5}-?\\d{3}$' },
-        CN: { format: 'Postal code', required: true, pattern: '^\\d{6}$' },
-        IN: { format: 'PIN code', required: true, pattern: '^\\d{6}$' },
-        RU: { format: 'Postal code', required: true, pattern: '^\\d{6}$' },
-        KR: { format: 'Postal code', required: true, pattern: '^\\d{5}$' },
-        SG: { format: 'Postal code', required: true, pattern: '^\\d{6}$' },
-        MX: { format: 'Postal code', required: true, pattern: '^\\d{5}$' },
-        AE: { format: 'Postal code', required: false },
-        HK: { format: 'Postal code', required: false },
-        IE: { format: 'Eircode', required: true, pattern: '^[A-Z]\\d{2}[A-Z0-9]{4}$' }
-    };
+    // Country change handler
+    country.addEventListener('change', function() {
+        const selectedCountry = countryInfo[this.value];
+        // todo consider moving
+        const zipContainer = document.getElementById('zipContainer');
+        if (selectedCountry.required) {
+            zipLabel.textContent = translations.zipcode;
+            zip.required = selectedCountry.required;
+            zip.pattern = selectedCountry.pattern || null;
+            zipContainer.style.display = 'block';
+        } else {
+            zipContainer.style.display = 'none';
+        }
+
+        validateForm();
+    });
 
     // Card number formatting
     cardNumber.addEventListener('input', function(e) {
@@ -68,25 +74,6 @@ document.addEventListener('DOMContentLoaded', function() {
         validateForm();
     });
 
-    // Country change handler
-    country.addEventListener('change', function() {
-        const selectedCountry = countryInfo[this.value];
-        const zipContainer = document.getElementById('zipContainer');
-        if (selectedCountry) {
-            zipLabel.textContent = JSON.parse(translations)[selectedCountry.format.toLowerCase().replace(' ', '')];
-            zip.required = selectedCountry.required;
-            zip.pattern = selectedCountry.pattern || null;
-            zipContainer.style.display =  'none'; // selectedCountry.required ? 'block' : 'none';
-            if (!selectedCountry.required) {
-                zip.value = '';
-            }
-        } else {
-            // TODO: remove here as well, add more countries, populate through JS 
-            console.log("zip not required, remove this block");
-        }
-
-        validateForm();
-    });
 
     // Form validation
     function validateForm() {
