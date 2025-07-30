@@ -28,6 +28,9 @@ def update_reservation():
     return jsonify(AzureTableManager.update_room(reservation_code, new_room_number))
 
 @app.route("/")
+def booking_page():
+    return redirect("https://boarenal.hospitable.rentals/")
+
 @app.route('/checkout')
 def checkout():
     client_reference_id = request.args.get('client_reference_id', '')
