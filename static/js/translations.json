@@ -1,7 +1,8 @@
 {
     "EN": {
         "payment_details": "Payment Details",
-        "email": "Email",
+        "email": "Email (optional, so we can send your receipt)",
+        "invalid_email": "Please enter a valid email address.",
         "card": "Card",
         "card_information": "Card information",
         "name_on_card": "Name on card",
@@ -23,7 +24,8 @@
     },
     "ES": {
         "payment_details": "Detalles del Pago",
-        "email": "Correo electrónico",
+        "email": "Correo electrónico (opcional, para enviar el recibo)",
+        "invalid_email": "Ups… ese correo no parece valido.", 
         "card": "Tarjeta",
         "card_information": "Información de tarjeta",
         "name_on_card": "Nombre en la tarjeta",
