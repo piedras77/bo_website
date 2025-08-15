@@ -15,7 +15,7 @@
             <!-- Business Information Column -->
             <div class="col-md-6 business-info">
                 <div class="business-content">
-                    <h1 class="business-name">Bo Arenal Stay</h1>
+                    <h1 class="business-name">Bo Arenal</h1>
                     <p class="tagline">{{ t.tagline }}</p>
                     <div class="business-image">
                         <img src="{{ url_for('static', filename='images/business.jpg') }}" alt="Bo Arenal Stay" class="img-fluid">
@@ -27,104 +27,27 @@
             <div class="col-md-6 payment-column">
                 <div class="payment-form">
                     <h4 class="mb-4">{{ t.payment_details }}</h4>
-                    <form id="paymentForm">
-                        <input type="hidden" id="clientReferenceId" value="{{ client_reference_id }}">
-                        <input type="hidden" id="currentLanguage" value="{{ lang }}">
-                        <input type="hidden" id="t" value="{{ t }}">
-                        <input type="hidden" id="countryInfo" value="{{ country_info }}">
-
-                        <div class="mb-3">
-                            <div class="price-display">
-                                <h2>${{ price }}</h2>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="email" class="form-label">{{ t.email }}</label>
-                            <input type="email" class="form-control" id="email" required>
-                        </div>
-
-
-
-                        <!-- Collapsible Section: Credit Card -->
-                        <div class="mb-4">
-                            <a class="btn btn-outline-secondary w-100 d-flex justify-content-center align-items-center gap-2" data-bs-toggle="collapse" href="#creditcardCollapse" role="button" aria-expanded="false" aria-controls="creditcardCollapse">
-                                <div class="me-auto">
-                                    <i class="bi bi-chevron-double-down"></i>
-                                </div>
-                                <span class="mx-auto">{{ t.card_information }}</span>
-                                <div class="ms-auto" style="visibility: hidden;">
-                                    <!-- Empty space to balance the icon on the left -->
-                                    <i class="bi bi-chevron-double-down"></i>
-                                </div>
-                            </a>
-                            <div class="collapse mb-3" id="creditcardCollapse">
-                                <label for="cardNumber" class="form-label">{{ t.card_information }}</label>
-                                <input type="text" class="form-control" id="cardNumber" placeholder="1234 1234 1234 1234" maxlength="19">
-                            </div>
-
-                            <div class="collapse row mb-3" id="creditcardCollapse">
-                                <div class="col">
-                                    <input type="text" class="form-control" id="expiry" placeholder="MM/YY" maxlength="5">
-                                </div>
-                                <div class="col">
-                                    <input type="text" class="form-control" id="cvc" placeholder="CVC" maxlength="4">
-                                </div>
-                            </div>
-
-                            <div class="collapse mb-3" id="creditcardCollapse">
-                                <label for="cardholderName" class="form-label">{{ t.name_on_card }}</label>
-                                <input type="text" class="form-control" id="cardholderName" placeholder="{{ t.full_name_placeholder }}">
-                            </div>
-
-                            <div class="collapse mb-3" id="creditcardCollapse">
-                                <label for="country" class="form-label">{{ t.country_region }}</label>
-                                <select class="form-select" id="country"></select>
-                            </div>
-                            <div id="zipContainer">
-                                <div class="collapse mb-3" id="creditcardCollapse">
-                                    <label for="zip" class="form-label" id="zipLabel">ZIP</label>
-                                    <input type="text" class="form-control" id="zip">
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Collapsible Section: Add-ons -->
-                        <div class="mb-4">
-                            <a class="btn btn-outline-secondary w-100 d-flex justify-content-center align-items-center gap-2" data-bs-toggle="collapse" href="#addOnsCollapse" role="button" aria-expanded="false" aria-controls="addOnsCollapse">
-                                <div class="me-auto">
-                                    <i class="bi bi-chevron-double-down"></i>
-                                </div>
-                                <span class="mx-auto">{{ t.add_ons_title }}</span>
-                                <div class="ms-auto" style="visibility: hidden;">
-                                    <!-- Empty space to balance the icon on the left -->
-                                    <i class="bi bi-chevron-double-down"></i>
-                                </div>
-                            </a>
-                            <div class="collapse mt-3" id="addOnsCollapse">
-                                <div id="addOns" class="form-check-container">
-                                    <!-- Checkboxes will be injected here via JS -->
-                                </div>
-                            </div>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary w-100" id="payButton" disabled>
-                            {{ t.pay }}
-                        </button>
-                    </form>
-                    <!-- Secured Payments Section -->
-                    <div class="stripe-footer d-flex justify-content-center align-items-center gap-2 mt-4 mb-4">
-                        <span>Secured payments handled by</span>
-                        <a href="https://www.google.com/search?q=stripe&sca_esv=5522b92e4be46ee0&sxsrf=AHTn8zoL1v8w--1M0T-Bd-XVsWpd1KuOaw%3A1742850884446&ei=RMvhZ-iDG8mq5NoP366r4Ag&ved=0ahUKEwjotfS-0aOMAxVJFVkFHV_XCowQ4dUDCBI&uact=5&oq=stripe&gs_lp=Egxnd3Mtd2l6LXNlcnAiBnN0cmlwZTIKECMYgAQYJxiKBTIEECMYJzIKECMYgAQYJxiKBTIREC4YgAQYsQMY0QMYgwEYxwEyCxAAGIAEGLEDGIMBMgoQABiABBhDGIoFMgoQABiABBhDGIoFMggQABiABBixAzIKEAAYgAQYQxiKBTIFEAAYgARI2RpQkBdYlhlwBXgBkAEAmAGrAaABgQKqAQMxLjG4AQPIAQD4AQGYAgegAs4CwgIHECMYsAMYJ8ICChAAGLADGNYEGEfCAhMQLhiABBiwAxjRAxhDGMcBGIoFwgINEAAYgAQYsQMYQxiKBZgDAIgGAZAGCpIHAzYuMaAHqROyBwMxLjG4B5oC&sclient=gws-wiz-serp">
-                            <img src="{{ url_for('static', filename='images/stripe.svg') }}" alt="Stripe" style="height: 24px;">
-                        </a>
+                    <input type="hidden" id="clientReferenceId" value="{{ client_reference_id }}">
+                    <input type="hidden" id="currentLanguage" value="{{ lang }}">
+                    <input type="hidden" id="t" value="{{ t }}">
+                    <input type="hidden" id="price" value="{{ price }}">
+                    <div class="price-display mb-3">
+                        <h2>${{ price }}</h2>
                     </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">{{ t.email }}</label>
+                        <input type="email" class="form-control" id="email" required>
+                    </div>
+                    <div id="paypal-button-container"></div>
                 </div>
             </div>
         </div>
     </div>
-
-    <script src="{{ url_for('static', filename='js/payment.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script
+        src="https://www.paypal.com/sdk/js?client-id={{ paypal_client_id }}&currency=USD&components=buttons&enable-funding=venmo,paylater,card"
+        data-sdk-integration-source="developer-studio"
+    ></script>
+    <script src="{{ url_for('static', filename='js/checkout.js') }}"></script>
 </body>
 </html>
