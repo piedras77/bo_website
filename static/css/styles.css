@@ -77,32 +77,6 @@ body {
     margin: 0;
 }
 
-.form-control, .form-select {
-    padding: 0.75rem;
-    border: 1px solid #ced4da;
-}
-
-.form-control:focus, .form-select:focus {
-    border-color: #80bdff;
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-}
-
-.btn-primary {
-    padding: 0.75rem;
-    font-weight: 500;
-}
-
-.btn-primary:disabled {
-    background-color: #ccc;
-    border-color: #ccc;
-}
-
-.payment-method {
-    border: 1px solid #ced4da;
-    padding: 1rem;
-    border-radius: 4px;
-}
-
 .error-input {
     border-color: #dc3545;
 }
@@ -118,15 +92,20 @@ body {
     display: block;
 }
 
-.stripe-footer {
-    background-color: transparent;
-    padding: 4rem 1rem 1rem 1rem;
-    font-size: 0.9rem;
-    color: #ccc;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.5rem;
+.form-control {
+    padding: 0.75rem;
+    border: 1px solid #ced4da;
+}
+
+.form-control:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.disabled-container {
+    pointer-events: none;
+    opacity: 0.5;
+    filter: grayscale(100%);
 }
 
 @media (max-width: 768px) {
@@ -134,7 +113,8 @@ body {
         overflow-y: auto;
     }
 
-    .business-info, .payment-column {
+    .business-info,
+    .payment-column {
         height: auto;
         min-height: auto;
         padding: 1rem;
