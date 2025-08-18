@@ -1,9 +1,5 @@
 from flask import Flask, render_template, request, jsonify, send_from_directory, redirect, Response, url_for
 
-# TODO: remove after testing
-import test_environment_setup
-
-
 import sys
 import os
 import json
