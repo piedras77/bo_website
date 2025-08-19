@@ -50,7 +50,9 @@ from paypalserversdk.api_helper import ApiHelper
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from reservations_data import AzureTableManager
+from reservations_data import AzureTableManager # TODO: deprecate this import
+
+from helpers import get_price
 
 app = Flask(__name__)
 
@@ -103,14 +105,12 @@ def normalize_language(lang):
 
 @app.route('/checkout')
 def checkout():
-    # TODO: get the price from the reservation table instead
     client_reference_id = request.args.get('client_reference_id', '')
-    price = request.args.get('price', '0.00')
     language = normalize_language(request.args.get('language'))
-
-    # TODO: get production paypal client ID from environment variable
     paypal_client_id = os.getenv("PAYPAL_CLIENT_ID")
     try:
+        # TODO: handle get price errors
+        price = get_price(client_reference_id)
         # Ensure price is formatted correctly
         price = "{:.2f}".format(float(price))
     except ValueError:
