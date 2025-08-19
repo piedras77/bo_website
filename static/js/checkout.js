@@ -15,11 +15,13 @@ document.addEventListener('DOMContentLoaded', function () {
     // Simple email validation and enable pay button
     function validateForm() {
         const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value) || email.value === '';
+        const isPriceValid = parseFloat(priceDisplay.textContent.replace(/[$,]/g, '')) > 0;
         if (showValidationErrors) {
             showValidationMessage(email, isEmailValid, translations.invalid_email);
+            showValidationMessage(priceDisplay, isPriceValid, translations.invalid_price);
         }
 
-        if (!isEmailValid) {
+        if (!isEmailValid || !isPriceValid) {
             paypalContainer.classList.add('disabled-container');
         } else {
             paypalContainer.classList.remove('disabled-container');
@@ -46,6 +48,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     email.addEventListener('input', () => validateForm());
+    validateForm();
 
     const paypalButtons = window.paypal.Buttons({
         style: {

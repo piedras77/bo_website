@@ -20,7 +20,8 @@
         "payment_failed_message": "We were unable to process your payment. Please try again.",
         "try_again": "Try Again",
         "add_ons_title": "Enhance Your Getaway with Add-ons",
-        "tagline": "Make Your Stay Unforgettable"
+        "tagline": "Make Your Stay Unforgettable",
+        "invalid_price": "Price cannot be zero"
     },
     "ES": {
         "payment_details": "Detalles del Pago",
@@ -43,6 +44,7 @@
         "payment_failed_message": "No pudimos procesar su pago. Por favor, intente nuevamente.",
         "try_again": "Intentar Nuevamente",
         "add_ons_title": "Mejora Tu Escapada con Add-ons",
-        "tagline": "Disfruta de una estadía inolvidable"
+        "tagline": "Disfruta de una estadía inolvidable",
+        "invalid_price": "El precio no puede ser cero"
     }
 }

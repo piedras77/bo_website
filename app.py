@@ -5,6 +5,8 @@ import os
 import json
 import logging
 
+from dotenv import load_dotenv
+
 from paypalserversdk.http.auth.o_auth_2 import ClientCredentialsAuthCredentials
 from paypalserversdk.logging.configuration.api_logging_configuration import (
     LoggingConfiguration,
@@ -51,6 +53,9 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from reservations_data import AzureTableManager
 
 app = Flask(__name__)
+
+load_dotenv()
+
 paypal_client: PaypalServersdkClient = PaypalServersdkClient(
     client_credentials_auth_credentials=ClientCredentialsAuthCredentials(
         o_auth_client_id=os.getenv("PAYPAL_CLIENT_ID"),
